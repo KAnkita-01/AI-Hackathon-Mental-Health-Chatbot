@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chat-container {
+            width: 400px;
+            max-width: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .chat-box {
+            height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .message {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .bot-message {
+            background: #d1f7d6;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 75%;
+        }
+        .user-message {
+            background: #f7d6e0;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 75%;
+            align-self: flex-end;
+        }
+        .bot-img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .user-img {
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+        }
+        .input-box {
+            display: flex;
+            border-top: 1px solid #ddd;
+            padding: 10px;
+        }
+        .input-box input {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+        }
+        .input-box button {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .input-box :hover {
+           background-color: bisque;
+        }
+        .chat-header {
+          background-color:lightpink;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .chat-header .logo {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .chat-container {
+            width: 400px;
+            
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+    <div class="chat-header">
+        <h3>Hey, I'm Doctor AI </h3>
+    </div>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <div class="input-box">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    
+    <script>
+        const chatBox = document.getElementById("chat-box");
+        const responses = {
+            "hi": "Hi How are you feeling today?!",
+            "hey": "Hey there! How are you feeling today",
+            "good morning": "Good Morning, Wishing you a pleasant day ahead.",
+            "good afternoon": "Good afternoon!",
+            "good evening": "Good evening. How was your day so far?",
+            "good night": "Good Night, have a peaceful sleep!",
+            "good": "Great, happy to hear that.",
+            "not so good": "Sad to hear that, have a positive attitude, things may workout well int he future.",
+            "bad": "Sad to hear that, have a positive attitude, things may workout well int he future.",
+            "hello": "Hello! How are you feeling today?",
+            "i feel sad": "I'm here for you. Would you like to try a mindfulness exercise?",
+            "i am anxious": "Take a deep breath. Try inhaling for 4 seconds, holding for 4, and exhaling for 4.",
+            "i need help": "You are not alone. I recommend reaching out to a trusted friend or professional.",
+            "bye": "Take care! Remember, you are stronger than you think."
+            
+        };
+        
+        function sendMessage() {
+            const userInput = document.getElementById("user-input").value.toLowerCase();
+            if (userInput.trim() === "") return;
+            
+            addMessage(userInput, "user");
+            document.getElementById("user-input").value = "";
+            
+            setTimeout(() => {
+                const botResponse = responses[userInput] || "I'm here to listen. Tell me more about how you feel.";
+                addMessage(botResponse, "bot");
+            }, 1000);
+        }
+        
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("message", sender === "bot" ? "bot-message" : "user-message");
+            
+            const img = document.createElement("img");
+            img.src = sender === "bot" ? "https://img.lovepik.com/element/45005/4531.png_860.png" :"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIf4R5qPKHPNMyAqV-FjS_OTBB8pfUV29Phg&s";
+
+            img.classList.add(sender === "bot" ? "bot-img" : "user-img");
+            
+            if (sender === "bot") {
+                messageDiv.appendChild(img);
+            }
+            
+            const textNode = document.createTextNode(text);
+            messageDiv.appendChild(textNode);
+            
+            if (sender === "user") {
+                messageDiv.appendChild(img);
+            }
+            
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        
+        addMessage("Hello! I'm your mental health assistant. How can I help you today?", "bot");
+    </script>
+</body>
+</html>
