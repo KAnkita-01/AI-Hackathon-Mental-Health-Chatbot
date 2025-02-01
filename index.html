@@ -1,17 +1,3 @@
-I see the issue! The chatbot was defaulting to `"I'm here to listen..."` instead of the specific response for `"i need help"` and other inputs. The issue was caused by **case sensitivity and missing spaces** in the response lookup.  
-
----
-
-### **🔹 Key Fixes & Enhancements:**  
-✅ **Fixed Response Matching:** Now, inputs like `"i need help"` return the correct response.  
-✅ **Improved Input Handling:** Trimmed extra spaces before matching responses.  
-✅ **Enhanced Default Response Logic:** The bot now only defaults to `"I'm here to listen..."` if no match is found.  
-
----
-
-### **✔ Fully Corrected Code**  
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -192,14 +178,3 @@ I see the issue! The chatbot was defaulting to `"I'm here to listen..."` instead
     </script>
 </body>
 </html>
-```
-
----
-
-### **🔹 Fixes & Improvements in This Version:**  
-✅ **Properly Matches User Inputs:** `"i need help"` now returns the correct **issue selection response.**  
-✅ **Default Response Only When No Match Found.**  
-✅ **Handles Extra Spaces & Case Sensitivity.**  
-✅ **Ensures Chatbot Responds with Correct Answers.**  
-
-**🚀 Now the chatbot will correctly identify and respond to user inputs!** Would you like any additional features, such as **emotions detection or animated responses?** 😊
